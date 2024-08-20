@@ -18,8 +18,29 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/root/hello.handler
     events:
       - http:
           path: /
           method: get
+
+  getData:
+    handler: src/basic/getData.handler
+    events:
+      - http:
+          path: /basic
+          method: get
+
+  postData:
+    handler: src/basic/postData.handler
+    events:
+      - http:
+          path: /basic
+          method: post
+
+package:
+  include:
+    - src/**
+  exclude:
+    - .gitignore
+    - README.md

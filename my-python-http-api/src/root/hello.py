@@ -1,7 +1,7 @@
 import json
 import os
 
-def hello(event, context):
+def handler(event, context):
     my_env_var = os.getenv('MY_ENV_VAR')
     body = {
         "message": "Go Serverless v4.0! Your function executed successfully!",

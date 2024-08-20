@@ -56,5 +56,11 @@ package:
   include:
     - src/**
   exclude:
+    - node_modules/**
+    - package.json
+    - package-lock.json
     - .gitignore
     - README.md
+
+plugins:
+  - serverless-offline

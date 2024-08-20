@@ -1,5 +1,7 @@
 # Serverless directories
 .serverless
+node_modules
+__pycache__
 
 # Distribution / packaging
 .Python

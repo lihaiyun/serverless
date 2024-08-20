@@ -8,6 +8,8 @@ service: my-python-http-api
 provider:
   name: aws
   runtime: python3.12
+  region: ap-southeast-1
+  role: arn:aws:iam::017820698732:role/MyLambdaDynamoDBExecutionRole
 
 functions:
   hello:

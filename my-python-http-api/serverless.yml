@@ -38,6 +38,20 @@ functions:
           path: /basic
           method: post
 
+  getItem:
+    handler: src/dynamoDB/getItem.handler
+    events:
+      - http:
+          path: /setting
+          method: get
+
+  putItem:
+    handler: src/dynamoDB/putItem.handler
+    events:
+      - http:
+          path: /setting
+          method: post
+
 package:
   include:
     - src/**

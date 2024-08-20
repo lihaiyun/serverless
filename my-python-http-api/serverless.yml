@@ -53,8 +53,6 @@ functions:
           method: post
 
 package:
-  include:
-    - src/**
   exclude:
     - .serverless/**
     - node_modules/**

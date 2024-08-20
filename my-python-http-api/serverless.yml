@@ -12,6 +12,10 @@ provider:
   region: ap-southeast-1
   role: arn:aws:iam::017820698732:role/MyLambdaDynamoDBExecutionRole
 
+  environment:
+    MY_ENV_VAR: 'my-value'
+    ANOTHER_VAR: 'another-value'
+
 functions:
   hello:
     handler: handler.hello

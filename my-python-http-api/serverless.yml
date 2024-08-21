@@ -57,7 +57,7 @@ functions:
         - src/**
 
   getItem:
-    handler: src/dynamoDB/getItem.handler
+    handler: src/setting/getItem.handler
     events:
       - http:
           path: /setting
@@ -65,12 +65,12 @@ functions:
     package:
       individually: true
       include:
-        - src/dynamoDB/getItem.py
+        - src/setting/getItem.py
       exclude:
         - src/**
 
   putItem:
-    handler: src/dynamoDB/putItem.handler
+    handler: src/setting/putItem.handler
     events:
       - http:
           path: /setting
@@ -78,7 +78,7 @@ functions:
     package:
       individually: true
       include:
-        - src/dynamoDB/putItem.py
+        - src/setting/putItem.py
       exclude:
         - src/**
 

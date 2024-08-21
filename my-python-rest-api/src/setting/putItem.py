@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 import boto3
 from botocore.exceptions import ClientError
 
@@ -31,7 +31,7 @@ def handler(event, context):
     
     # Prepare item with updated time
     item = body
-    item['updatedAt'] = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S') + 'Z'
+    item['updatedAt'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S') + 'Z'
     
     # Initialize a session using Amazon DynamoDB
     dynamodb = boto3.resource('dynamodb')

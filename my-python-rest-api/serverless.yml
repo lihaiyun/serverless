@@ -123,9 +123,8 @@ package:
     - package-lock.json
     - .gitignore
     - README.md
-    - python/**
-    - '*.zip'
-    - python-layer.md
+    - layers/**
+    - layers.md
 
 plugins:
   - serverless-offline

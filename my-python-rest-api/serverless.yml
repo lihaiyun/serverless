@@ -1,0 +1,96 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: haiyun
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: my-python-http-api
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: my-python-http-api
+
+provider:
+  name: aws
+  runtime: python3.12
+  stage: ${opt:stage, 'dev'}
+  region: ap-southeast-1
+  role: arn:aws:iam::017820698732:role/MyLambdaDynamoDBExecutionRole
+
+  environment:
+    MY_ENV_VAR: 'my-value'
+    ANOTHER_VAR: 'another-value'
+
+functions:
+  hello:
+    handler: src/root/hello.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+    package:
+      individually: true
+      include:
+        - src/root/hello.py
+      exclude:
+        - src/**
+
+  getData:
+    handler: src/basic/getData.handler
+    events:
+      - httpApi:
+          path: /basic
+          method: get
+    package:
+      individually: true
+      include:
+        - src/basic/getData.py
+      exclude:
+        - src/**
+
+  postData:
+    handler: src/basic/postData.handler
+    events:
+      - httpApi:
+          path: /basic
+          method: post
+    package:
+      individually: true
+      include:
+        - src/basic/postData.py
+      exclude:
+        - src/**
+
+  getItem:
+    handler: src/setting/getItem.handler
+    events:
+      - httpApi:
+          path: /setting
+          method: get
+    package:
+      individually: true
+      include:
+        - src/setting/getItem.py
+      exclude:
+        - src/**
+
+  putItem:
+    handler: src/setting/putItem.handler
+    events:
+      - httpApi:
+          path: /setting
+          method: post
+    package:
+      individually: true
+      include:
+        - src/setting/putItem.py
+      exclude:
+        - src/**
+
+package:
+  exclude:
+    - .serverless/**
+    - node_modules/**
+    - __pycache__/**
+    - package.json
+    - package-lock.json
+    - .gitignore
+    - README.md
+
+plugins:
+  - serverless-offline

@@ -83,6 +83,20 @@ functions:
       exclude:
         - src/**
 
+  authorizeUser:
+    handler: src/user/authorizeUser.handler
+    events:
+      - http:
+          path: /user
+          method: post
+          authorizer: aws_iam
+    package:
+      individually: true
+      include:
+        - src/user/authorizeUser.py
+      exclude:
+        - src/**
+
 package:
   exclude:
     - .serverless/**

@@ -1,9 +1,9 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
 org: haiyun
 # "app" enables Serverless Framework Dashboard features and sharing them with other Services.
-app: my-python-http-api
+app: my-python-api
 # "service" is the name of this project. This will also be added to your AWS resource names.
-service: my-python-http-api
+service: my-python-rest-api
 
 provider:
   name: aws

@@ -20,7 +20,7 @@ functions:
   hello:
     handler: src/root/hello.handler
     events:
-      - http:
+      - httpApi:
           path: /
           method: get
     package:
@@ -33,7 +33,7 @@ functions:
   getData:
     handler: src/basic/getData.handler
     events:
-      - http:
+      - httpApi:
           path: /basic
           method: get
     package:
@@ -46,7 +46,7 @@ functions:
   postData:
     handler: src/basic/postData.handler
     events:
-      - http:
+      - httpApi:
           path: /basic
           method: post
     package:
@@ -59,7 +59,7 @@ functions:
   getItem:
     handler: src/setting/getItem.handler
     events:
-      - http:
+      - httpApi:
           path: /setting
           method: get
     package:
@@ -72,7 +72,7 @@ functions:
   putItem:
     handler: src/setting/putItem.handler
     events:
-      - http:
+      - httpApi:
           path: /setting
           method: post
     package:

@@ -13,6 +13,7 @@ provider:
   role: arn:aws:iam::017820698732:role/MyLambdaDynamoDBExecutionRole
 
   environment:
+    STAGE: ${self:provider.stage}
     MY_ENV_VAR: 'my-value'
     ANOTHER_VAR: 'another-value'
 

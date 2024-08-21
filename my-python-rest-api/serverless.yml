@@ -100,6 +100,8 @@ functions:
 
   getEvents:
     handler: src/event/getEvents.handler
+    layers:
+      - arn:aws:lambda:ap-southeast-1:017820698732:layer:myPythonLayer:2
     events:
       - http:
           path: /event
@@ -121,6 +123,9 @@ package:
     - package-lock.json
     - .gitignore
     - README.md
+    - python/**
+    - '*.zip'
+    - python-layer.md
 
 plugins:
   - serverless-offline

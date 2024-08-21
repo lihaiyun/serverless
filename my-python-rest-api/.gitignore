@@ -3,6 +3,8 @@
 node_modules
 __pycache__
 
+python
+*.zip
 credentials.json
 
 # Distribution / packaging

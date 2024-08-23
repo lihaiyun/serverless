@@ -1,5 +1,6 @@
-# Install Python 3.12
+# Install Python3
 https://www.python.org/downloads/
+python --version
 
 # Install AWS CLI
 https://aws.amazon.com/cli/

@@ -14,7 +14,7 @@ provider:
 
   environment:
     STAGE: ${self:provider.stage}
-    GOOGLE_SHEET_URL: 'https://docs.google.com/spreadsheets/d/1Y0iw5NxlHykZFOKprg_fCMbAbp5-4GH5fpFGodadvqI/edit?gid=148163941#gid=148163941'
+    GOOGLE_SHEET_URL: 'https://docs.google.com/spreadsheets/d/158k7h98Ri8VCgG3hRNUPtWeiTOPGG81abnlIP0q8low/edit'
     MY_ENV_VAR: 'my-value'
     ANOTHER_VAR: 'another-value'
 

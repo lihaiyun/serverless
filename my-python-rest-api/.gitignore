@@ -4,7 +4,7 @@ node_modules
 __pycache__
 
 layers
-credentials.json
+src/credentials.json
 
 # Distribution / packaging
 .Python

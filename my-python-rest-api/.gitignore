@@ -3,7 +3,7 @@
 node_modules
 __pycache__
 
-layers
+my_layers
 src/credentials.json
 
 # Distribution / packaging

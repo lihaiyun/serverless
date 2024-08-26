@@ -1,5 +1,5 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: haiyun
+org: nyptelegram
 # "app" enables Serverless Framework Dashboard features and sharing them with other Services.
 app: my-python-api
 # "service" is the name of this project. This will also be added to your AWS resource names.
@@ -101,7 +101,7 @@ functions:
   getEvents:
     handler: src/event/getEvents.handler
     layers:
-      - arn:aws:lambda:ap-southeast-1:017820698732:layer:myPythonLayer:2
+      - arn:aws:lambda:ap-southeast-1:017820698732:layer:python-layer-google-api:1
     events:
       - http:
           path: /event
@@ -123,7 +123,7 @@ package:
     - package-lock.json
     - .gitignore
     - README.md
-    - layers/**
+    - my_layers/**
     - layers.md
 
 plugins:

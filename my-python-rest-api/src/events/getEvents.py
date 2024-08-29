@@ -3,12 +3,34 @@ import os
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import re
+import boto3
 
 # Path to your credentials file
-SERVICE_ACCOUNT_FILE = os.path.join(os.path.dirname(__file__), '../credentials.json')
+stage = os.getenv('STAGE')
+SERVICE_ACCOUNT_FILE = os.path.join(os.path.dirname(__file__), f'credentials.{stage}.json')
 
 # Scopes required for accessing Google Sheets
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+
+def get_setting(name):
+    # Initialize a session using Amazon DynamoDB
+    dynamodb = boto3.resource('dynamodb')
+
+    # DynamoDB table
+    table_name = "TestSettings"
+    table = dynamodb.Table(table_name)
+
+    try:
+        # Get item from DynamoDB table
+        response = table.get_item(Key={'name': name})
+
+        if 'Item' in response:
+            return response['Item']
+        else:
+            return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 def get_sheet_name(spreadsheet_id):
     # Authenticate and create the service object
@@ -31,8 +53,14 @@ def extract_spreadsheet_id_from_url(url):
     return None
 
 def handler(event, context):
-    # Example public URL of the Google Sheet
+    # Get public URL from environment variable
     public_url = os.getenv('GOOGLE_SHEET_URL')
+    print(f"Public URL from environment variable: {public_url}")
+
+    # Get public URL from dynammoDB
+    item = get_setting('GoogleSheetUrl')
+    public_url = item['value']
+    print(f"Public URL from dynammoDB: {public_url}")
 
     spreadsheet_id = extract_spreadsheet_id_from_url(public_url)
     sheet_name = None

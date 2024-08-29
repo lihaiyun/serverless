@@ -14,7 +14,6 @@ provider:
 
   environment:
     STAGE: ${self:provider.stage}
-    GOOGLE_SHEET_URL: 'https://docs.google.com/spreadsheets/d/158k7h98Ri8VCgG3hRNUPtWeiTOPGG81abnlIP0q8low/edit'
     MY_ENV_VAR: 'my-value'
     ANOTHER_VAR: 'another-value'
 
@@ -29,8 +28,6 @@ functions:
       individually: true
       include:
         - src/root/hello.py
-      exclude:
-        - src/**
 
   getData:
     handler: src/basic/getData.handler
@@ -42,8 +39,6 @@ functions:
       individually: true
       include:
         - src/basic/getData.py
-      exclude:
-        - src/**
 
   postData:
     handler: src/basic/postData.handler
@@ -55,34 +50,39 @@ functions:
       individually: true
       include:
         - src/basic/postData.py
-      exclude:
-        - src/**
 
-  getItem:
-    handler: src/setting/getItem.handler
+  getItems:
+    handler: src/settings/getItems.handler
     events:
       - http:
-          path: /setting
+          path: /settings
           method: get
     package:
       individually: true
       include:
-        - src/setting/getItem.py
-      exclude:
-        - src/**
+        - src/settings/getItems.py
 
-  putItem:
-    handler: src/setting/putItem.handler
+  getItemByName:
+    handler: src/settings/getItemByName.handler
     events:
       - http:
-          path: /setting
-          method: post
+          path: /settings/{name}
+          method: get
     package:
       individually: true
       include:
-        - src/setting/putItem.py
-      exclude:
-        - src/**
+        - src/settings/getItemByName.py
+
+  putItem:
+    handler: src/settings/putItem.handler
+    events:
+      - http:
+          path: /settings
+          method: put
+    package:
+      individually: true
+      include:
+        - src/settings/putItem.py
 
   authorizeUser:
     handler: src/user/authorizeUser.handler
@@ -95,36 +95,39 @@ functions:
       individually: true
       include:
         - src/user/authorizeUser.py
-      exclude:
-        - src/**
 
   getEvents:
-    handler: src/event/getEvents.handler
+    handler: src/events/getEvents.handler
     layers:
       - arn:aws:lambda:ap-southeast-1:017820698732:layer:python-layer-google-api:1
+    environment:
+      GOOGLE_SHEET_URL: ${self:custom.${self:provider.stage}.GOOGLE_SHEET_URL}
     events:
       - http:
-          path: /event
+          path: /events
           method: get
     package:
       individually: true
       include:
-        - src/event/getEvents.py
-        - src/credentials.json
-      exclude:
-        - src/**
+        - src/events/getEvents.py
+        - src/events/credentials.${self:provider.stage}.json
+
+custom:
+  dev:
+    GOOGLE_SHEET_URL: 'https://docs.google.com/spreadsheets/d/158k7h98Ri8VCgG3hRNUPtWeiTOPGG81abnlIP0q8low/edit'
 
 package:
   exclude:
     - .serverless/**
+    - docs/**
+    - my_layers/**
     - node_modules/**
+    - src/**
     - __pycache__/**
+    - .gitignore
     - package.json
     - package-lock.json
-    - .gitignore
     - README.md
-    - my_layers/**
-    - layers.md
 
 plugins:
   - serverless-offline

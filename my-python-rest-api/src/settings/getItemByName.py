@@ -3,24 +3,15 @@ import boto3
 from boto3.dynamodb.conditions import Key
 
 def handler(event, context):
-    # Extracting query string parameters
-    query_string_parameters = event.get('queryStringParameters', {})
-    print(f"Query String Parameters: {query_string_parameters}")
-    if query_string_parameters is None:
-        return {
-                'statusCode': 404,
-                'body': json.dumps({'error': 'Request is invalid'})
-            }
-    
-    # Extracting name from query string parameters
-    name = query_string_parameters.get('name')
+    # Get name from path parameters
+    name = event.get('pathParameters', {}).get('name')
     print(f"Name: {name} ")
     if name is None:
         return {
                 'statusCode': 404,
                 'body': json.dumps({'error': 'Name is required'})
             }
-    
+
     # Initialize a session using Amazon DynamoDB
     dynamodb = boto3.resource('dynamodb')
     
